@@ -329,6 +329,7 @@
         alternately, change the type="ignored" to some other type e.g. "text" if you want 
         unknown fields indexed and/or stored by default --> 
    <field name="dc.description" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
+   <field name="ocr" type="text" indexed="true" stored="false" multiValued="true"/>
    <dynamicField name="*" type="text_fgs"  indexed="true"  stored="true" multiValued="true"/>
    
  </fields>
