@@ -21,7 +21,7 @@ class FJM {
    * @deprecated
    */
   function showPerson($pagenumber = NULL) {
-    return theme('fjm_clamor_person', $this->pid);
+    //return theme('fjm_clamor_person', $this->pid);
   }
   
   /**
@@ -30,16 +30,16 @@ class FJM {
    * @return string 
    */
   function showConcert($pagenumber = NULL) {
-    return theme('fjm_clamor_concert', $this->pid, $pagenumber);
+    //return theme('fjm_clamor_concert', $this->pid, $pagenumber);
   }
   
   //TODO: Cleanup ((Rather) Bad variable names)
   //TODO:  Need to add link with Titn
   function showScore($pagenumber = NULL) {
-    return theme('fjm_clamor_score', $this->pid);
+    //return theme('fjm_clamor_score', $this->pid);
   }
   
   function showProgram($pagenumber = NULL) {
-    return theme('fjm_clamor_program', $this->pid);
+    //return theme('fjm_clamor_program', $this->pid);
   }
 }
