@@ -312,14 +312,18 @@ function islandora_fjm_perform_solr_q($query, $fields = "PID", $other_params = a
   
   $solr_url = url($solr_url, array(
     'absolute' => TRUE,
-    'query' => http_build_query($other_params, NULL, '&')
+    'query' => $other_params,
   ));
 
-  $doc = DOMDocument::loadXML(do_curl($solr_url));
+  $results = drupal_http_request($solr_url);
   
-  $error = error_get_last();
-  if (is_callable("dsm") && !empty($error)) {
-    dsm($error);
+  if ((int)($results->code / 100) == 2) {
+    $doc = DOMDocument::loadXML($results->data);
+    
+    $error = error_get_last();
+    if (is_callable("dsm") && !empty($error)) {
+      dsm($error);
+    }
   }
 
   return ((!$doc)?(new DOMDocument()):($doc));
