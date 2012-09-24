@@ -298,7 +298,7 @@ function islandora_fjm_perform_sparql_query($query, $limit = -1, $offset = 0) {
  */
 function islandora_fjm_perform_solr_q($query, $fields = "PID", $other_params = array()) {
   _islandora_fjm_user_agent_hack();
-  $solr_url = variable_get('fedora_solr_search_url', 'http://localhost:8080/solr') . '/select';
+  $solr_url = variable_get('islandora_solr_search_block_url', 'http://localhost:8080/solr') . '/select';
   $other_params['q'] = $query;
   
   if (!is_array($fields)) {
@@ -316,7 +316,6 @@ function islandora_fjm_perform_solr_q($query, $fields = "PID", $other_params = a
   ));
 
   $results = drupal_http_request($solr_url);
-  
   if ((int)($results->code / 100) == 2) {
     $doc = DOMDocument::loadXML($results->data);
     
