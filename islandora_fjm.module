@@ -122,15 +122,15 @@ function islandora_fjm_scraper($node_select = array('type' => 'march_menus')) {
   $nodes = islandora_fjm_loadnodes($node_select);
 
   $doc = new DOMDocument();
-  
   //Process the nodes:
   foreach($nodes as $node) {
     //Grab the page containing the markup
-    $doc->loadHTMLFile($node->field_link[0]['url']);
+    $html = drupal_http_request($node->field_link[0]['url']);
+    $html = $text = mb_convert_encoding($html->data, 'HTML-ENTITIES', "UTF-8");
+    $doc->loadHTML($html);
     
     //Parse it, so as to be able to fix relative links
     $url_info = parse_url($node->field_link[0]['url']);
-    
     //XPath is nice. :P
     $xpath = new DOMXPath($doc);
     
@@ -156,7 +156,6 @@ function islandora_fjm_scraper($node_select = array('type' => 'march_menus')) {
     $imp = $doc->importNode($scraped, TRUE);
     //...into the root node
     $doc->appendChild($imp);
-    
     //Write out the scraped content
     $node->body = $doc->saveHTML();
     //And save it to the node.
